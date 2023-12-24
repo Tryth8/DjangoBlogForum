@@ -1,0 +1,30 @@
+<div class="d-block d-sm-none d-flex justify-content-center">
+    <a class="btn btn-success" href="{% url 'topics' %}">All Topics</a>
+</div>
+
+<div class="container d-none d-lg-block">
+    <h3 class="text-center">Topics</h3>
+    <div class="row mb-3">
+        <div class="col">
+            <a class="lead" href="{% url 'main' %}">All</a>
+        </div>
+        <div class="col">
+            <p class="text-end">{{ post_count }}</p>
+        </div>
+    </div>
+    {% for topic in topics|slice:":10" %}
+        <div class="row mb-3">
+            <div class="col">
+                <a class="lead" href="{% url 'main' %}?q={{ topic.name }}">{{ topic }}</a>
+            </div>
+            <div class="col">
+                <p class="text-end"><a href="{% url 'main' %}?q={{ topic.name }}">{{ topic.post_set.all.count }}</a></p>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row mb-3">
+        <div class="col">
+            <a class="lead" href="{% url 'topics' %}">Search for more...</a>
+        </div>
+    </div>
+</div>
