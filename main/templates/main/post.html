@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="container-lg">
+        <div class="row g-5">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col border border-secondary bg-light mb-5">
+                        <div class="row">
+                            <div class="col">
+                                <h1>{{ post.name }}</h1>
+                            </div>
+                            <div class="col text-end">
+                                <strong class="lead">{{ post.created|timesince }} ago</strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <small>Author: <a href="{% url 'profile' post.host.id %}">@{{ post.host }}</a></small>
+                        </div>
+                        <div class="row mt-3">
+                            <h5>Content</h5>
+                            <p class="">{{ post.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col border border-secondary bg-light">
+                        <h5>Comments</h5>
+                        {% for message in post_messages|slice:'10' %}
+                            <div class="activity-message">
+                                <div class="toast-header">
+                                    <strong class="me-auto"><a
+                                            href="{% url 'profile' message.user.id %}">@{{ message.user }}</a> </strong>
+
+                                    <small>{{ message.created|timesince }} ago</small>
+                                </div>
+                                <div class="toast-body">
+                                    <div class="me-auto">{{ message.body }}</div>
+
+                                    {% if request.user == message.user %}
+                                        <a href="{% url 'delete-message' message.id %}">Delete</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% if request.user.is_authenticated %}
+                            <div class="text-start mt-5">
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <label class="form-label" for="commentInput">Comment this post</label>
+                                    <br>
+                                    <input id="commentInput" type="text" name="body" placeholder="Comment...">
+                                    <br>
+                                    <button class="btn btn-primary mt-3" type="submit">Submit</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 border border-secondary bg-light">
+                <h3>Participants</h3>
+                {% for participant in participants %}
+                    <div>
+                        <a href="{% url 'profile' participant.id %}">@{{ participant.username }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+<h3 class="text-center">Recent Activity</h3>
+<div class="activity-container">
+    {% for message in post_messages|slice:":10" %}
+        <div class="activity-message">
+            <div class="toast-header">
+                <strong class="me-auto"><a href="{% url 'profile' message.user.id %}">@{{ message.user }}</a> replied to
+                    post <a href="{% url 'post' message.post.id %}">"{{ message.post }}"</a></strong>
+                <small>{{ message.created|timesince }} ago</small>
+            </div>
+            <div class="toast-body">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
