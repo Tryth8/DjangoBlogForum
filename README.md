@@ -1,1 +1,1 @@
-Django website
+Stack: Django, Bootstrap
