@@ -1,4 +1,4 @@
-Very first pet-project
+Very first pet-project. Not finished at all.
 Stack: Django, Bootstrap
 
 1) python manage.py runserver
