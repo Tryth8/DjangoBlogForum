@@ -1,3 +1,4 @@
+Very first pet-project
 Stack: Django, Bootstrap
 
 1) python manage.py makemigrations
