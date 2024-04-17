@@ -1,4 +1,5 @@
-Very first pet-project. Not finished at all.
+Very first pet-project. Just learning Django here and practicing in Bootstrap. Will turn this website to a nice looking social media website soon. 
+
 Stack: Django, Bootstrap
 
 1) python manage.py runserver
